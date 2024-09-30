@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 struct Ticket {
     title: String,
     description: String,
@@ -17,7 +18,20 @@ impl Ticket {
     // as well as some `String` methods. Use the documentation of Rust's standard library
     // to find the most appropriate options -> https://doc.rust-lang.org/std/string/struct.String.html
     fn new(title: String, description: String, status: String) -> Self {
-        todo!();
+        // 
+        if title.len() == 0 { panic!{"Title cannot be empty"}}
+        if description.len() == 0 { panic!{"Description cannot be empty"}}
+        
+        if title.as_bytes().len() > 50 { panic!{"Title cannot be longer than 50 bytes"}}
+        if description.as_bytes().len() > 500 { panic!{"Description cannot be longer than 500 bytes"}}
+        
+        let valid_statuses = ["To-Do", "In Progress", "Done"];
+        if valid_statuses.iter().any(|&valid_status| valid_status == status) {
+            println!("Ticket status '{}' is valid.", status);
+        } else {
+            panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
+        }
+
         Self {
             title,
             description,

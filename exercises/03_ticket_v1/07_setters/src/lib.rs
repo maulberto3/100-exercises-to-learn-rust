@@ -38,13 +38,29 @@ impl Ticket {
         &self.title
     }
 
+    pub fn set_title(&mut self, new_title: String) {
+        let _ = Ticket::new(new_title.clone(), self.description.clone(), self.status.clone());
+        self.title = new_title
+    }
+
     pub fn description(&self) -> &String {
         &self.description
+    }
+
+    pub fn set_description(&mut self, new_description: String) {
+        let _ = Ticket::new(self.title.clone(), new_description.clone(), self.status.clone());
+        self.description = new_description
     }
 
     pub fn status(&self) -> &String {
         &self.status
     }
+
+    pub fn set_status(&mut self, new_status: String) {
+        let _ = Ticket::new(self.title.clone(), self.description.clone(), new_status.clone());
+        self.status = new_status
+    }
+
 }
 
 #[cfg(test)]
